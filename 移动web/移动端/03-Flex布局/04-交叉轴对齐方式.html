@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex布局</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            display: flex;
+            /* align-items : 给弹性容器添加 */
+            /* align-self : 控制某个弹性盒子在侧轴的对齐方式, 给弹性盒子添加 */
+
+            /* 属性值 (items和self属性值相同)*/
+            /* flex-start : 默认值,起点开始依次排序 */
+            /* flex-end : 重点开始依次排序 */
+            /* center : 沿交叉轴居中排列 */
+            /* stretch : 默认值, 弹性盒子沿着主轴线被拉伸至容器铺满 */
+            /* align-items: center; */
+            height: 300px;
+            border: 1px solid #000;
+        }
+
+        .box div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+
+        .box div:nth-child(2) {
+            align-self: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+</body>
+</html>

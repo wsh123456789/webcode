@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            /* 近大远小的视觉效果，需要给父级元素添加，一般在800到1200 */
+            perspective: 1000px;
+        }
+
+        .box {
+            margin: 50px auto;
+            width: 200px;
+            height: 100px;
+            background: pink;
+            transition: all 1s;
+        }
+
+        .box:hover {
+            transform: translate3d(50px, 100px, 200px);
+        }
+    </style>
+</head>
+<body>
+    <h2>transform: translate3d(x, y, z)</h2>
+    <div class="box"></div>
+</body>
+</html>

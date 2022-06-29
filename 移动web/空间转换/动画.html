@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            background: pink;
+
+            /* 使用动画 */
+            /* animation: change 1s steps(3) 1s 3 alternate; */
+            /* steps为分布动画  后边的1s为延迟时间  3为重复次数（infinite为无限循环）*/
+
+            /* animation: change 1s infinite alternate; */
+            /* alternate 为反向效果 */
+
+            animation: change 1s forwards;
+            /* forwards为结束后保持结束的状态 */
+            /* backwards为默认值,返回初始状态 */
+
+        }
+
+        .box:hover {
+            animation-play-state: paused;
+            /* 暂停动画 */
+        }
+        /* 定义动画 从200到600 */
+        @keyframes change {
+
+            from {
+                width: 200px;
+            }
+            to {
+                width: 600px;
+            }
+        }
+         
+        /* @keyframes change {
+            0% {
+                width: 200px;
+            }
+            50% {
+                width: 500px;
+                height: 300px;
+            }
+            100% {
+                width: 800px;
+                height: 500px;
+            }
+        } */
+    </style>
+</head>
+<body>
+    <h2> animation: 动画名称 动画时长 速度曲线 延迟时间 重复次数 动画方向 执行完毕时状态</h2>
+    <h2>动画名称和动画时长必须赋值</h2>
+    <h2>取值不分先后</h2>
+    <h2>如果有2个时间值,第一个时间表示动画时长,第二个时间表示延迟时间</h2>
+    <div class="box"></div>
+</body>
+</html>

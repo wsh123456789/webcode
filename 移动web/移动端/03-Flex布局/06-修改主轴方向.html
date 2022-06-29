@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+        }
+
+        .box li {
+            display: flex;
+            /* row : 默认属性,水平 */
+            /* column ： 列,垂直 */
+            /* row-reverse : 行,从右往左 */
+            /* column-reverse : 列,从下到上 */
+            flex-direction: column;
+            width: 80px;
+            height: 80px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <!-- flex-direction -->
+    <div class="box">
+        <ul>
+            <li>
+                <span>音乐</span>
+                <span>媒体</span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

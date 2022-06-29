@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 400px;
+            height: 200px;
+            background: pink url("images/1.jpg") no-repeat;
+        }
+
+        .one {
+            background-size: 100px;
+        }
+
+        .two {
+            background-size: 50% 30%;
+        }
+
+        .three {
+            background-size: contain;
+        }
+
+        .four {
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- 设置背景图的大小 -->
+    <!-- background-size : 宽 高; -->
+    <!-- 取值： 
+            数字+px  ： 方便常用
+            百分比  ： 相对盒子宽高的百分比 
+            contain : 包含，将背景图等比缩放,直到不会超出盒子的最大
+            cover ： 覆盖，将背景图等比缩放，直到刚好填满整个盒子-->
+    <div class="one"></div>
+    <hr><br>
+    <div class="two"></div>
+    <hr><br>
+    <div class="three"></div>
+    <hr><br>
+    <div class="four"></div>
+</body>
+</html>

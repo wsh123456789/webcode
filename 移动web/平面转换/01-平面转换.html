@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .father {
+            width: 400px;
+            height: 200px;
+            margin: 0 auto;
+            border: 1px solid #000;
+        }
+
+        .son {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100px;
+            height: 50px;
+            background: pink;
+            transform: translate(-50%,-50%);
+            transition: all 1s;
+        }
+
+        .father:hover .son {
+            transform: translate(50%,50%);
+        }
+
+        img {
+            width: 200px;
+            transition: all 2s;
+        }
+
+        img:hover {
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>平面转换 transform</h1>
+    <h2>1.位移</h2>
+    <h3> transform: translate(水平位移, 垂直位移); </h3>
+    <h3> 单独移动可使用translateX()或translateY() </h3>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <h2>2.旋转</h2>
+    <h3> transform: rotate(角度);</h3>
+    <img src="./images/rotate.png" alt="">
+    <h2>3.转换原点</h2>
+    <h3> transform-origin: 原点水平位置 原点垂直位置;</h3>
+    <h3> 取值： 方位名词(left, top, right, bottom, center)   像素   百分比</h3>
+    <h2>4.多重转换</h2>
+    <h3> transform: translate() rotate()</h3>
+    <h2>5.缩放</h2>
+    <h3> scale改变元素尺寸</h3>
+    <h3> transform: scale(1.5);</h3>
+</body>
+</html>

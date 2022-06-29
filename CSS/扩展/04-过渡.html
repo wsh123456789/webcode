@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background: pink;
+            /* transition: width 2s, background-color 2s; */
+            transition: all 2s;
+        }
+
+        .box:hover {
+            width: 600px;
+            background: orange;
+            /* transition: width 2s; */
+        }
+    </style>
+</head>
+<body>
+    <!-- 让元素样式慢慢的变化，通常配合hover使用，增强网页交互体验 -->
+    <!-- 属性名 ： transition -->
+    <!-- 常见取值 :
+            过渡属性   all : 所有能过渡的属性都过渡 
+                      具体属性名如 ：
+                        width : 只有width过渡
+            过渡时长 数字加s(秒)       
+                    -->
+    <!-- 
+        注意点 ：
+            1.过渡需要 ：默认状态 和 hover状态样式不同，才能有过渡效果
+            2.transition属性需要给过渡的元素本身加
+            3.transition属性设置在不同的状态中，效果不同
+                （1）给默认状态设置，鼠标移入移出都有过渡效果
+                （2）给hover状态设置，鼠标移入有过渡效果，移出没有效果 
+     -->
+     <div class="box"></div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    
+    var isShow = false;
+    var num = 0;
+    function run() {
+      var demo = document.getElementById('demo');
+      demo.style.display = isShow ? 'none' : 'block';
+      
+      demo.onmouseover = function(event) {
+        console.log(event, 'over');
+      }
+      
+      isShow = !isShow;
+      console.log(num, 222)
+      
+      document.title = num + document.title;
+      
+      if(num > 5) {
+        clearInterval(timer);
+      } else {
+        num++;
+      }
+    }
+    var timer = setInterval(run, 2000);
+
+//     通过这个对象模型，JavaScript 获得创建动态 HTML 的所有力量：
+//
+//     JavaScript 能改变页面中的所有 HTML 元素
+//     JavaScript 能改变页面中的所有 HTML 属性
+//     JavaScript 能改变页面中的所有 CSS 样式
+//     JavaScript 能删除已有的 HTML 元素和属性
+//     JavaScript 能添加新的 HTML 元素和属性
+//     JavaScript 能对页面中所有已有的 HTML 事件作出反应
+//     JavaScript 能在页面中创建新的 HTML 事件
+    
+    // setInterval clearInterval 循环执行
+    // setTimeout clearTimeout 只执行一次
+    
+    // canvas 小游戏：定时器setInterval
+
+    // Event 对象: onclick, onmouseover, onmouseout
+    // Location 对像: host, pathname, port, href, origin, hash
+    // hash 锚点
+    
+    // js 改变 css
+    // demo.style.marginTop = 100; // 小驼峰
+    
+    // https://www.w3school.com.cn/js/js_htmldom_eventlistener.asp
+  
+  </script>
+  <style>
+    .demo {
+      margin-top: 1000px;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo">123</div>
+  <button onclick="run()">开始</button>
+  <a href="#123">maodian</a>
+  <div class="demo" id="123">123</div>
+  <button onclick="run()">开始</button>
+
+</body>
+</html>

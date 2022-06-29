@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 数据类型 Number String
+
+        // 一.数字型
+        // 八进制 前边加0
+        var num1 = 012;
+        console.log(num1);
+        // 十六进制 前边加0x
+        var num2 = 0x1a
+        console.log(num2);
+        // 最大值
+        console.log(Number.MAX_VALUE);
+        // 最小值
+        console.log(Number.MIN_VALUE);
+        // 无穷大 Infinity
+        console.log(Number.MAX_VALUE * 2);
+        // 无穷小 -Infinity
+        console.log(-Number.MAX_VALUE * 2);
+        // NaN 非数字
+        console.log('pink' - 100);
+        // isNaN() 这个方法用来判断非数字 并返回一个值 如果是数字返回的是 false 如果不是数字返回true
+        console.log(isNaN(12))
+        console.log(isNaN('pink'))
+
+        //二.字符串型
+        var str;
+        // 1.字符串转义字符
+        //      \n 换行 \t 缩进  \b空格
+        //      \\ 斜杠 \' 单引号 \"双引号\
+        str = "第一行\n第二行";
+        console.log(str);
+        // 2.检测获取字符串长度
+        str = 'my name is lilei';
+        console.log(str.length); //16
+        // 3.字符串拼接
+        var str1 = 'pink';
+        var str2 = 'aaa';
+        console.log(str1 + str2);
+
+        // 三.布尔类型
+        var flag = true;
+        var flag1 = false;
+        console.log(flag + 1);
+        console.log(flag1 + 1);
+
+        // 四.undefined未定义数据类型 , var = str;
+
+        // 五.null 空值
+
+        // 获取数据的类型 typeof
+        var num = 10;
+        console.log(typeof num); // number
+        var str = 'pink';
+        console.log(typeof str); // string
+
+        // 数据转换
+        // 1.转换为字符串类型
+            // 1.toString方法
+            var num = 10;
+            var str = num.toString();
+            console.log(str);
+            console.log(typeof str);
+            // 2.String()强转
+            num = 20;
+            str = String(num);
+            console.log(str);
+            console.log(typeof str);
+            // 3.利用 + 拼接字符实现隐式转换
+            num = 30;
+            str = num + '';
+            console.log(str);
+            console.log(typeof str);
+        // 2.转换为数字型
+            //    parseInt(变量) 可以把字符型转换为数字型  得到的是整数
+            //    parseFloat(变量) 得到小数，浮点数
+            //    Number(变量) 强转
+            //    利用了算数运算 - * / 隐式转换
+            var str = '123.123';
+            console.log(parseInt(str));
+            console.log(parseFloat(str));
+            console.log(Number(str));
+            console.log(str - 0);
+            console.log(typeof parseInt(str));
+        // 3.转换为布尔型
+            //Boolean() 返回true或false
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

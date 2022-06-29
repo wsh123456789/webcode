@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 800px;
+            height: 200px;
+        }
+
+        img {
+            width: 200px;
+            transition: all 4s;
+        }
+
+        .box:hover img {
+            /* transform:  rotateX(720deg); */
+            /* transform:  rotateY(720deg); */
+            transform:  rotateZ(720deg);
+            /* transform: rotate3d(x,y,z,角度数); 
+                x,y,z取值为0-1之间的数字*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <img src="../平面转换/images/rotate.png" alt="">
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .box {
+            margin: 50px auto;
+            width: 249px;
+            height: 210;
+            /* overflow: hidden; */
+        }
+
+        .box p {
+            padding: 10px 10px 0 10px;
+            color: #3b3b3b;
+        }
+
+        .box .pic {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box .pic::after {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -29px;
+            margin-top: -29px;
+            content: '';
+            width: 58px;
+            height: 58px;
+            background: url("./images/play.png");
+            transform: scale(5);
+            opacity: 0;
+            transition: all .5s;
+        }
+
+        .box li:hover .pic::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li>
+                <div class="pic"><img src="./images/party.jpeg" alt=""></div>
+                <p>66666666666666666</p>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
