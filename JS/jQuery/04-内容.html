@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <span>内容</span>
+    </div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <input type="text" value="请输入内容" placeholder="请输入内容">
+    <ul>
+        <li>原来的li</li>
+    </ul>
+    <div class="text">aaaaaaa</div>
+    <script>
+        //获取设置元素内容(带标签) html()
+        console.log($('div').eq(0).html());
+        $('div').eq(0).html('修改后的内容');
+        //获取设置元素内容(不带标签) text()
+        console.log($('div').eq(0).text());
+        $('div').eq(0).text('第二次修改后的内容');
+        //获取设置表单值 val()
+        console.log($('input').val());
+        $('input').val('123');
+        // 遍历元素 each() 多用于标签的遍历
+        // $('div').each(function(index, domEle) {})
+        var arr = ['red', 'skyblue', 'pink', 'orange'];
+        // $('div').each(function (index, domEle) {
+        //     $(domEle).css('color', arr[index]);
+        // })
+        // 遍历元素 $.each() 多用于数组或对象的遍历
+        $.each($('div'), function (index, domEle) {
+            $(domEle).css('color', arr[index]);
+        })
+        // 创建元素
+        var li = $('<li>新创建的</li>')
+        // 添加元素
+
+        // 内部添加
+        // element.append('内容')放到最后边   prepend()防到最前边
+        $('ul').prepend(li);
+        // $('ul').append(li);
+
+        // 外部添加
+        var div = $('<div>新创建的div</div>');
+        // $('.text').after(div);
+        $('.text').before(div);
+
+        //删除元素
+        // $('ul').remove(); // 删除匹配的元素
+        // $('ul').empty();  // 删除他的所有子节点
+        // $('ul').html('')  // 让其内容为空
+
+        //尺寸
+        // width() / height() 取得匹配元素宽度和高度值 只算w/h
+        // innerWidth() / innerHeight()  包括padding
+        // outerWidth() / outerHeight()  包含padding,border
+        // outerWidth(true) / outerHeight(true)  包含padding,border,,margin
+
+        // 文档
+        // offset(), position(), scrollTop()/scrollLeft()
+
+        // offset({}) 设置或返回元素相对于  文档  的偏移坐标
+        // offset().top/left
+
+        // position({})  设置或返回元素相对于  父级  的偏移坐标，没有就返回相对于文档的
+
+        // scrollTop()   设置或返回元素被卷去的头部
+        // scrollLeft()  设置或返回元素被卷去的左部
+
+        // 事件处理
+        // on(event, [selector], fn)
+        // one() 触发一次
+        // 解绑
+        // off(event)
+
+        //自动触发事件
+        $("input").on("focus", function () {
+            $(this).val("你好呀！")
+        })
+        // 1、元素.事件
+        // $("input").focus()
+        // 2、元素.trigger(事件)
+        // $("input").trigger("focus")
+        // 3、元素.triggerHandler(事件) 不会触发元素默认行为
+        $("input").triggerHandler("focus")
+        //event.stopPropagation()阻止冒泡;
+        // 对象拷贝
+        // $.extend([deep], target, object1, [objectN])
+        // deep: true是深拷贝,false是浅拷贝, 默认浅拷贝
+        // target： 要拷贝的目标对象
+        // object: 待拷贝的对象
+    </script>
+</body>
+
+</html>

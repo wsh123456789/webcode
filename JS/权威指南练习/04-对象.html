@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //对象直接量表示法创建对象
+        var empty = {}; //不包含任何属性的对象
+        var point = { x: 3, y: 5 }; //包含两个属性的对象
+        var point2 = { x: point.x + 1, y: point.y + 1 }; //属性值可以是表达式
+        var book = {
+            "main title": "JavaScript", //属性名有空格，必须用字符串表示
+            "sub-title": "The Defintive Guide", //属性名有连字符，必须用字符串表示
+            "for": "all audiences", //属性名是保留字，必须用字符串表示
+            author: { //这个属性的值是一个对象
+                firstname: "David",
+                surname: "Flanagan"
+            }
+        }
+
+        //通过关键字创建对象
+        var o = new Object(); //创建一个空对象，等价于 0={}
+        var a = new Array(); //创建一个空数组
+        var d = new Date(); //创建一个代表当前时间的Date对象
+        var r = new RegExp("js"); //创建一个正则表达式对象
+
+        //使用Object.create()函数创建对象
+        vara = Object.create({ 'isLock': true });  //为对象a指定一个原型
+        console.log(a.isLock); //=> true  o继承原型对象属性isLock
+        console.log(a.hasOwnProperty('isLock')); //=> false  验证isLock并非o的自有属性
+
+        var b = Object.create(Object.prototype);//创建一个普通的空对象
+
+        var b = Object.create(null); //该对象不包括任何对象的基础方法
+
+
+        //原型
+        //inherit()返回了一个继承自原型对象p属性的新对象
+        //这里是有ECMAScript5中的Object.create()函数（如果存在的话）
+        //如果不存在Object.create,则使用其他方法
+        function inherit(p) {
+            if (p == null) throw TypeError();//p是一个对象，但不能是null
+            if (Object.create) {    //如果Object.create（）存在，直接使用它
+                return Object.create(p);
+            }
+            var t = typeof p;
+            if (t !== "object" && t !== "function") throw TypeError();
+            function f() { };//定义一个空构造函数
+            f.prototype = p;   //将其原型属性设置为p 
+            return new f();    //使用f创建p的继承对象
+        }
+
+
+        //查修与修改
+        var book = { 'author': 'Tom', 'main title': 'Hello JavaScript' };
+        var author = book.author;           //1.获取book的“author”属性值
+        var title = book["main title"];     //2.获取book的“main title”属性值
+        book.edition = 6;                   //3.给book创建一个“edition”属性
+        book["main title"] = "ECMAScript";  //4.修改"main title"属性值
+
+        // //关联数组
+        // var addr = "";
+        // for (i = 0; i < 4; i++) {
+        //     addr += customer["address" + i] + '\n';
+        // };
+
+        // function getvalue(protfolio) {
+        //     var total = 0.0;
+        //     for (stock in protfolio) { //遍历protfolio中的每只股票
+        //         var shares = protfolio[stock]; //得到每只股票的份额
+        //         var price = getquote(stock); //查找股票的价格
+        //         total += shares * price; //将结果累加到total中
+        //     }
+        //     return total;
+        // }
+
+        //继承
+        var o = {}              //o从Object.prototype继承对象的方法
+        o.x = 1;                //给o定义一个属性x
+        var p = inherit(o);     //p继承o和Object.prototype
+        p.y = 2;                //给p定义一个属性y
+        var q = inherit(p);     //q继承p、o和Object.prototype
+        q.z = 3;                //给q定义一个属性z
+        var s = q.toString();   //toString()继承Object.prototype
+        console.log(q.x + q.y);
+        q.x = 5
+        console.log(o.x);     //1  
+
+        //删除delete
+        delete book.author;   //book不再有属性author
+        delete book["main title"];//book不再有属性"main title"
+        console.log("author" in book);  // => false
+        console.log("main title" in book); // => false
+
+        o = { x: 1 };        //o有一个属性x，并继承属性toString
+        delete o.x;          //删除x，返回true
+        delete o.x;          //什么都没做，（x已经不存在），返回true
+        delete o.toString(); //什么也没有做（toString是继承来的），返回true
+        delete o.toString(); //返回true
+        delete 1;            //无意义
+
+        delete Object.prototype; //不能删除，属性是不可配置的
+        var x = 1; //声明一个全局变量
+        console.log(delete this.x); //不能删除整个属性
+        function f() { } // 声明一个全局函数
+        console.log(delete this.f); //也不能删除全局函数
+
+        this.y = 1; //创建一个可配置的全局属性(没有用var)
+        console.log(delete y); //将它删除
+
+        // delete x; //在严格模式下报语法错误 
+        // delete this.x; //正常工作
+
+        //  检查属性
+        //in方法
+        var o = { x: 1 }
+        "x" in o; //=>true
+        "y" in o; //=>false y不是o的属性
+        "toString" in o;//=>true o继承toString属性
+
+        //hasOwnProperty()函数
+        var o = { x: 1 };
+        o.hasOwnProperty("x"); //=>true o中有一个自有属性x
+        o.hasOwnProperty("y"); //=>false 
+        o.hasOwnProperty("toString"); //false toString是继承属性
+
+        //propertyIsEnumerable()是hasOwnProperty()的增强版，只有检测到是自有属性且这个属性的可枚举性（Enumerable attrubute）为true时才返回true
+        var o = inherit({ y: 2 });
+        o.x = 1;
+        o.propertyIsEnumerable("x"); //true:o是一个可枚举的自有属性
+        o.propertyIsEnumerable("y");//false y是继承来的
+        Object.prototype.propertyIsEnumerable("toString");//false 不可枚举
+
+        //!==方法
+        var o = { x: 1 }
+        console.log(x !== undefined); //true o有属性x
+        console.log(o.y !== undefined); //fakse: o没有属性y
+        console.log(o.toString() !== undefined); //true:o继承了toString属性
+
+        //只能用in不能用!==的情况
+        var o = {
+            x: undefined
+        } //
+        o.x !== undefined; //属性存在，但值为undefined
+        o.y !== undefined; //属性不存在
+        "x" in o; //true
+        "y" in o; //false
+        delete o.x; //删除了属性x
+        "x" in o //false  属性不存在
+
+        //枚举属性
+        var o = { x: 1, y: 2, z: 3 };          //三个可枚举的属性
+        o.propertyIsEnumerable("toString");//=>false，不可枚举
+        for (p in o)                        //遍历属性
+            console.log(p);                    //属性x y z 不会输出toString
+
+        /*
+            *把p中可枚举的属性复制到o中，并返回o
+            *如果o和p中含有同名属性，则覆盖o中的属性
+            *这个函数并不出来getter和setter以及复制属性
+        */
+        function extend(o, p) {
+            for (prop in p) { //遍历p中所有的属性
+                o[prop] = p[prop]; //将遍历属性添加至o中
+            }
+            return o;
+        }
+        /*将p中可枚举的属性复制至o中，并返回o
+         * 如果o和p有同名属性，o中的属性将不受影响
+         * 这个函数并不出来getter和setter以及复制属性
+         */
+
+        function merge(o, p) {
+            for (prop in p) { //遍历p中所有的元素
+                if (o.hasOwnProperty[prop]) continue; //过滤掉已在o中存在的属性
+                o[prop] = p[prop]; //将属性添加至o中
+            }
+            return o;
+        }
+
+        /*
+         * 如果o中的属性在p中没有同名属性，则从o中删除这个属性
+         * 返回o
+         */
+        function restrict(o, p) {
+            for (prop in o) { //遍历o的所有属性
+                if (!(prop in p)) delete o[prop]; //如果在p中不存在，则删除之
+            }
+            return o;
+        }
+
+        /*
+         * 如果o中的属性在p中存在属性，则从o中删除这个属性
+         * 返回o
+         */
+        function subtarck(o, p) {
+            for (prop in p) { //遍历p中所有的属性
+                delete o[prop]; //从o中删除（删除一个不存在的属性一般不报错）
+            }
+            return o;
+        }
+
+        /*
+         * 返回一个新对象，这个对象同事拥有o的属性和p的属性
+         * 如果o和p中有同名属性，使用p中的属性
+         */
+        function union(o, p) {
+            return extend(extend({}, o), p);
+        }
+
+        /*
+         * 返回一个新对象，这个对象同事拥有o的属性和p中出现的属性
+         * 很像求o和p的交集，但p中的属性值被忽略
+         */
+        function intersection(o, p) {
+            return restrict(extend({}, o), p);
+        }
+
+        /*
+         * 返回一个数组，这个数组包含的是o中可枚举的自由属性的名字
+         */
+        function keys(o) {
+            if (typeof o !== "object") throw TypeError(); //参数必须是对象
+            var result = []; //将要返回的对象
+            for (var prop in o) { //遍历所有可枚举的属性
+                if (o.hasOwnProperty(prop)) //判断是否自有属性
+                    result.push(prop); //将属性名添加至数组中
+            }
+            return result; //返回这个数组
+        }
+
+        // //存取器属性
+        // var o = {
+        //     //普通数据属性
+        //     data_prop: value,
+
+        //     //存取器属性都是成对定义的函数
+        //     get accessor_prop() { /*这里是函数体*/ },
+        //     set accessor_prop(value) { /*这里是函数体*/ }
+        // };
+
+        var p = {
+            //x和y是普通的可读写数据属性
+            x: 1.0,
+            y: 1.0,
+            //r是可读写的存取器属性，它带有getter和setter。
+            //函数体结束后不要忘记带上逗号
+            get r() {
+                return Math.sqrt(this.x * this.x + this.y * this.y);
+            },
+            set r(newvalue) {
+                var oldvalue = Math.sqrt(this.x * this.x + this.y * this.y);
+                var ratio = newvalue / oldvalue;
+                this.x *= ratio;
+                this.y *= ratio;
+            },
+            //theta是只读存取器属性，它只有getter方法
+            get theta() {
+                return Math.atan2(this.y, this.x);
+            }
+        };
+
+        var q = inherit(p); //创建一个继承getter和setter的新对象
+        q.x = 1, q.y = 1; //给q添加两个属性
+        console.log(q.r) //可以使用存储器的存取属性
+        console.log(q.theta);
+
+        //这个对象产生严格的自增序列号
+        var serialnum = {
+            //这个属性包含下一个序列号
+            //$符号暗示这个属性是一个私有属性
+            $n: 0,
+
+            //返回当前的值，然后自增
+            get next() {
+                return this.$n++;
+            },
+
+            //返回当前新的值，大只有当它比当前值大时才设置成功
+            set next(n) {
+                if (n >= this.$n) this.$n = n;
+                else throw "序列号的值不能比当前值小";
+            }
+        };
+        var q = inherit(serialnum);
+        console.log(q.next);
+        q.next = 3;
+        console.log(q.next);
+
+        //这个对象表示有一个可以返回随机数的存取器属性
+        //例如，"random.octet"产生一个随机数
+        //每次产生的随机数都在0-255之间
+        var random = {
+            get octet() {
+                return Math.floor(Math.random() * 256);
+            },
+            get uint16() {
+                return Math.floor(Math.random() * 65536);
+            },
+            get int16() {
+                return Math.floor(Math.random() * 65536) - 32768;
+            }
+        }
+        var q = inherit(random);
+        console.log(q.octet);
+
+        //通过调用Object.getOwnPropertyDescriptor()获得某个对象特定的属性描述符
+        //返回{value: 1, writable: true, enumerable: true, configurable: true}
+        Object.getOwnPropertyDescriptor({ x: 1 }, "x");
+        console.log(Object.getOwnPropertyDescriptor({ x: 1 }, "x"))
+        //查询上例子中的randam对象的octet属性
+        //返回 {get: /*function octet(){...*/ , set: undefined, enumerable: true, configurable: true}
+        Object.getOwnPropertyDescriptor(random, "octet");
+        console.log(Object.getOwnPropertyDescriptor(random, "octet"));
+        //对于继承属性和不存在的属性，返回undefined
+        Object.getOwnPropertyDescriptor({}, "x"); //undefined 没有这个属性
+        console.log(Object.getOwnPropertyDescriptor({}, "x"));
+        Object.getOwnPropertyDescriptor({}, "toString"); //undefined 继承属性
+        console.log(Object.getOwnPropertyDescriptor({}, "toString"));
+
+        var o = {}; //空对象
+        //添加一个不可枚举的数据属性x，并赋值1
+        Object.defineProperty(o, "x", { value: 1, writable: true, enumerable: false, configurable: true });
+        // {value: 1, writable: true, enumerable: false, configurable: true}
+        Object.getOwnPropertyDescriptor(o, "x");
+
+        //属性是存在的，但不可枚举
+        o.x; //=> 1
+        Object.keys(o) //=> [];
+
+        //现在对属性x修改，让它只变为只读
+        Object.defineProperty(o, "x", { writable: false });
+
+        //试图改变这个属性的值
+        o.x = 2; //操作失败但不报错，严格模式中会抛出类型错误的异常
+        o.x //=> 1
+
+        //属性依然是可配置的，因此可以通过这样的方式进行修改：
+        Object.defineProperty(o, "x", { value: 2 });
+        o.x //=>2
+
+        //现在讲x从数据属性修改为存取器属性
+        Object.defineProperty(o, "x", { get: function () { return o; } });
+        o.x //=>o
+
+        //修改多个属性
+        var p = Object.defineProperties({}, {
+            x: { value: 1, writable: true, enumerable: true, configurable: true },
+            y: { value: 1, writable: true, enumerable: true, configurable: true },
+            z: {
+                get: function () {
+                    return Math.sqrt(this.x * this.x + this.y * this.y)
+                }, enumerable: true, configurable: true
+            }
+        });
+        console.log(p) //=>Object {x: 1, y: 1, z: 1.4142135623730951}
+
+        //连同特性复制对象
+        /*
+            *复制属性的特性
+            *Object.prototype添加一个不可枚举的extend()方法
+            * 这个方法继承自调用它的对象，将作为参数传入的对象的属性一一复制
+            * 除了值之外，也复制属性的所有特性，除非在目标对象中有同名的属性
+            * 参数对象的所有自有对象（包括不可枚举的属性）也会一一复制
+        * */
+        Object.defineProperty(Object.prototype,
+            "extend", //定义Object.prototype.extend
+            {
+                writable: true,
+                enumerable: false, //将其定义为不可枚举的
+                configurable: true,
+                value: function (o) { //值就是这个函数
+                    //得到所有的自由属性，包括不可枚举属性
+                    var names = Object.getOwnPropertyNames(o);
+                    //遍历他们
+                    for (var i = 0; i < names.length; i++) {
+                        //如果属性已经存在，则跳过
+                        if (names[i] in this) continue;
+                        //获得o中的属性描述符
+                        var desc = Object.getOwnPropertyDescriptor(o, names[i]);
+                        //用它给this创建一个属性
+                        Object.defineProperty(this, names[i], desc);
+                    }
+                }
+            }
+        );
+
+        //对象的三个属性
+        //原型属性
+        var p = { x: 1 };                     //一个原型对象
+        var o = Object.create(p);           //使用这个原型创建一个对象
+        p.isPrototypeOf(o);                 //=>true o继承自p
+        Object.prototype.isPrototypeOf(p);  //=>true p继承自Object.prototype
+
+        //类属性
+        function classOf(o) {
+            if (o === null) return "Null";
+            if (o === undefined) return "Undefined";
+            return Object.prototype.toString.call(o).slice(8, -1);
+        }
+
+        //可扩展性
+        //创建一个封闭对象，包括一个冻结的原型和一个不可枚举的属性
+        var o = Object.seal(Object.create(Object.freeze({ x: 1 }), {
+            y: { value: 2, writable: true }
+        }));
+
+        //序列化对象
+        o = { x: 1, y: { z: [false, null, ""] } }; //定义一个测试对象
+        s = JSON.stringify(o); //s是'{"x":1,"y":{"z":[false,null,""]}}'
+        p = JSON.parse(s) //p是o的深拷贝
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

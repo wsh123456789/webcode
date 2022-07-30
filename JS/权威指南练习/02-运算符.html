@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    //in运算符
+    var point = { x: 1, y: 1 };
+    console.log("x" in point);          // => true:对象有一个名为"x"的属性
+    console.log("z" in point);;         // => false:对象不存在名为"z"的属性
+    console.log("toString" in point);   // => true:对象继承了toString()方法
+
+    var data = [7, 8, 9];
+    console.log("0" in data);           // => true 数组包含元素"0"
+    console.log(1 in data);             // => true 数字转换为字符串
+    console.log(3 in data);             // => false 没有索引值为3的元素
+
+    //instanceof运算符
+    var d = new Date();                 //通过Date()构造函数创造一个新对象
+    console.log(d instanceof Date);     // => true d是由Date()创建的
+    console.log(d instanceof Object);   // => true 所有的对象都是Object的实例
+    console.log(d instanceof Number);   // => false d不是一个Number对象;
+
+    var a = [1, 2, 3];
+    console.log(a instanceof Array);    // => true a是一个数组
+    console.log(a instanceof Object);   // => true 所有的数组都是对是对象;
+    console.log(a instanceof RegExp);   // => false 数组不是正则表达式;
+
+    //eval运算符
+    var geval = eval;                   //这里调用geval => 间接调用eval；
+    var x = "global", y = "global";
+
+    function fn() {                     //此函数直接调用eval()
+        var x = "local";
+        eval("x = x +'changed'");
+        return x;
+
+    }
+
+    function gn() {                     //此函数间接调用eval()
+        var y = "local";
+        geval("y = y + 'changed'");
+        return y;
+
+    }
+    console.log(fn(), x);               //这里会输出localchanged global，这里的localchanged 就是fn中返回的结果，而全局属性x依然为global；
+    console.log(gn(), y);               //这里会输出local globalchanged, 这里lcoal 就是gn中返回的结果 ,因为gn()函数中是对全局eval=>geval进行了修改所以y为globalchanged
+
+    //三元运算符
+    var a = 20;
+    var b = 10;
+    var max = a > b ? a : b; //如果a>b 执行a,否则执行b;
+    console.log(max);
+
+    // 获取数据的类型 typeof
+    var num = 10;
+    console.log(typeof num); // number
+    var str = 'pink';
+    console.log(typeof str); // string
+
+    //delete运算符
+    var o = { x: 1, y: 2 };
+    console.log('x' in o);          //true
+    console.log(o.x);               //1
+    console.log(delete o.x);        //true删除x属性
+    console.log('x' in o);          //false,可以用in检测属性是否被删除
+    console.log(o.x);               //undefined
+
+    var a = [1, 2, 3, 4];
+    console.log(a.length);         //4
+    console.log(a[2]);             //3
+    console.log(delete (a[2]));    //true
+    console.log(2 in a)            //false 元素2已经不存在数组中了
+    console.log(a.length);         //4,并没有删除a[2],仅仅是把a[2]的值置为undefined
+    console.log(a[2]);             //undefined,验证上面说法
+</script>
+
+<body>
+
+</body>
+
+</html>

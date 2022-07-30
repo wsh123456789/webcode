@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: pink;
+        }
+    </style>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+    <button>下拉滑动</button>
+    <button>上拉滑动</button>
+    <button>切换滑动</button>
+    <button>动起来</button>
+    <div></div>
+    <script>
+        // 显示与隐藏
+        // show([speed, [easing], [fn]]) 
+        // hide同理
+
+        //滑动属性值于show相同
+        $(function() {
+           var btn =  $('button');
+           btn.eq(0).click(function() {
+                //下滑动 slideDown()
+                $('div').slideDown(1000);
+                
+           })
+
+           btn.eq(1).click(function() {
+                //上滑动 slideUp()
+                $('div').slideUp(1000);
+           })
+
+           btn.eq(2).click(function() {
+                //切换滑动 slideToggle()
+                $('div').slideToggle(1000);
+           })
+        })
+
+        // stop() 停止当前动画或效果 写道动画效果前面，相当于结束上一次动画，解决多次触发动画加载混乱问题
+        // 淡入淡出 属性值与show()相同   fadeIn()  fadeOut()  fadeToggle()
+        // 透明度   fadeTo([[speed], opacity, [easing], [fn]]) speed和opacity必须写
+
+        // 自定义动画 animate(params, [speed], [easing], [fn])
+        // 想要改变样式属性,以对象形式传递,必须写,属性名可以不用引号,复合属性采用驼峰命名法。
+        $(function() {
+            $('button').eq(3).click(function() {
+                $('div').animate({
+                    'left': 500
+                }, 500);
+            })
+        })
+    </script>
+</body>
+</html>

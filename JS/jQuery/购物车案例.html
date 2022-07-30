@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery.min.js"></script>
+    <title>数量添加</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .change {
+            margin-top: 200px;
+            margin-left: 200px;
+        }
+        
+        .change a {
+            float: left;
+            text-decoration: none;
+            color: #ccc;
+            width: 20px;
+            height: 25px;
+            border: 1px solid #cacbcb;
+            text-align: center;
+            line-height: 25px;
+        }
+        
+        .change input {
+            float: left;
+            height: 25px;
+            width: 50px;
+            border: 1px solid #ccc;
+            border-left: 0;
+            border-right: 0;
+            outline: none;
+            text-align: center;
+        }
+    </style>
+    <script src="./jquery.min.js"></script>
+</head>
+ 
+<body>
+    <script>
+        $(function() {
+            // 1.声明一个变量，点击+时让这个值++，然后赋值给文本框 
+            // 点击+就进行++然后赋值给文本框
+            $('.increment').click(function() {
+                    // 获取文本框里面的数字
+                    var num = $(this).siblings('.itxt').val();
+                    console.log(num);
+                    num++;
+                    $(this).siblings('.itxt').val(num)
+                })
+                // 点击-就进行--然后赋值给文本框
+            $('.decrement').click(function() {
+                // 获取文本框里面的数字
+                // 获取文本框里面的数字
+                var num = $(this).siblings('.itxt').val();
+                num--;
+                // 不能再减
+                if (num === 0) {
+                    return false
+                }
+                $(this).siblings('.itxt').val(num)
+            })
+        })
+    </script>
+    <div class="change">
+        <a href="javascript:;" class="decrement">-</a>
+        <input type="text" value="1" class="itxt">
+        <a href="javascript:;" class="increment">+</a>
+    </div>
+</body>
+ 
+</html>

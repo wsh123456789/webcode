@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    $.get('目标地址', {参数}, function(data) {
+        console.log('回调');
+    }, 'json')
+
+    $.ajax({
+        url: 地址,
+
+        data: {},
+
+        type: 'GET'/'POST',
+
+        dataType: 'json',
+
+        success: function(data){
+            console.log('成功回调');
+        },
+
+        timeout: 2000,
+
+        error: function(data){
+            console.log('失败回调');
+        }
+
+        headers: {
+            c: 300,
+            d: 400
+        }
+    })
+</body>
+</html>

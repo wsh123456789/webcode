@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="display:block;
+    width: 100px;
+    height: 100px; 
+    background: pink "></div>
+    <script>
+        // window.onload 执行完事件在加载 后一个会覆盖前一个
+        // window.addEventListener 无限制使用
+
+        // resize   浏览器窗口大小发生变化时触发
+        window.addEventListener('load', function () {
+            var div = document.querySelector('div');
+            window.addEventListener('resize', function () {
+                console.log(window.innerWidth);
+                console.log('变化了');
+                if (window.innerWidth <= 800) {
+                    div.style.display = 'none';
+                } else {
+                    div.style.display = 'block';
+                }
+
+            })
+        })
+        // setTimeout
+        // 语法规范：  window.setTimeout(调用函数, 延时时间);
+        // 1. 这个window在调用的时候可以省略
+        // 2. 这个延时时间单位是毫秒 但是可以省略，如果省略默认的是0
+        // 3. 使用方法
+
+        // 这个调用函数可以直接写函数
+        setTimeout(function () {
+
+            console.log('时间到了');
+
+        }, 2000);
+
+        // 还可以写 函数名
+
+        function callback() {
+
+            console.log('爆炸了');
+
+        }
+
+        setTimeout(callback, 2000);
+        // 还有一个写法 '函数名()'（不提倡）
+        setTimeout('callback()', 3000);
+        // 页面中可能有很多的定时器，我们经常给定时器加名字，起名同时也调用了
+        var timer = setTimeout(callback, 3000);
+        // 清除定时器clearTimeout(定时器名);
+        clearTimeout(timer);
+
+        // setInterval和setTimeout用法相同,但前者是重复调用，后者只调用一次
+        
+        // location对象属性
+        // 如果当前浏览器加载的URL为： http://www.xixihaha.com:8080/loginPage/?q=helloWorld#home
+        // 那么对应的属性取值如下：
+        // hash："#home"，URL散列值，如果没有为空字符串；
+        // host：“www.xixihaha.com: 8080”，服务器名及端口号；
+        // hostname：“www.xixihaha.com”，服务器名；
+        // href：“http://www.xixihaha.com:8080/loginPage/?q=helloWorld#home”，加载当前页面的完整URL；
+        // pathname："/loginPage/"，URL中的路径和文件名；
+        // port：“8080”，请求的端口，如果没有则返回空字符串；
+        // protocol：“http:”，页面使用的协议，通常为http: 或https；
+        // search："?q=helloWorld"，URL的查询字符串；
+        // origin：“http://www.xixihaha.com”，URL的源地址。只读属性
+        // medasd() 重新加载当前文档
+
+        //常用的方法
+        // location.assign(跳转的网址) 重定向
+        // location.replace(目标网址) 替换当前页面，不记录历史不能后退
+        // location.reload() 重新加载页面，如果参数为true则强制刷新页面
+
+        // navigator对象  userAgent 返回由客户机发送服务器的 user-agent 头部的值判断是pc端还是移动端
+
+        // History
+        // length	    返回历史列表中的网址数
+        // back()	    加载 history 列表中的前一个 URL
+        // forward()	加载 history 列表中的下一个 URL
+        // go()	        加载 history 列表中的某个具体页面
+
+        // offset常用属性	作用
+        // element.offsetParent	返回该元素带有定位的父元素，如果父级都没有定位返回body
+        // element.offsetTop	返回元素带有定位父元素距离上方的偏移量
+        // element.offsetLeft	返回元素带有定位父元素距离左边的偏移量
+        // element.offsetWidtht	返回自身的宽度，包括padding、border、内容区，返回值不带单位px
+        // element.offsetHeight	返回自身的高度，包括padding、border、内容区，返回值不带单位px
+
+        //client系列属性
+        // element.clientTop      返回元素上边框的大小
+        // element.clientLeft     返回元素左边框的大小
+        // element.clientWidth    返回自身包括padding、内容区的宽度,不含边框,返回值不带单位px
+        // element.clientHeight   返回自身包括padding、内容区的高度,不含边框,返回值不带单位px
+
+        // 立即执行函数
+        // (function(){}()) 或 (function(){})()
+        
+        //scroll系列属性
+        // element.scrollTop      返回被卷去的上侧距离,返回值不带单位
+        // element.scrollLeft     返回被卷去的左侧距离,返回值不带单位
+        // element.scrollWidth    返回自身实际的宽度,不含边框,返回值不带单位
+        // element.scrollHeight   返回自身实际的高度,不含边框,返回值不带单位
+        
+    </script>
+</body>
+
+</html>

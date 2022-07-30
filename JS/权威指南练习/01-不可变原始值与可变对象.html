@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var s = "hello, world";
+        console.log(s.replace(/l/g, "L"));
+        console.log(s.toUpperCase());
+        console.log(s);
+        //数组和对象都是可修改的
+        var o = { x: 1 };
+        o.x = 2;
+        o.y = 3;
+        console.log(o);
+
+        var a = [1, 2, 3];
+        a[0] = 0;
+        a[3] = 4;
+        console.log(a);
+        // 具有两个相同属性的两个对象永不相等
+        var o = { x: 1 }, p = { x: 1 };
+        console.log(o === p); // => false
+        //两个单独的空数组永不相等
+        var a = [], b = [];
+        console.log(a === b);// => false
+        //当c数组引用a数组时，c数组的修改会影响a一起修改，且c和a相等
+        var c = a;
+        c[0] = 1;
+        console.log(a[0]); // => 1
+        console.log(a === c); // => true
+
+        //循环赋值
+        var a = ['a', 'b', 'c']
+        var b = [];
+        for (var i = 0; i < a.length; i++) {
+            b[i] = a[i];
+        }
+        var n = 123456.789;
+
+        //根据小数点后指定位数转化字符串
+        n.toFixed(0);   //"123456"
+
+        n.toFixed(2);   //"123456.79"
+
+        n.toFixed(5);   //"123456.78900"
+
+        //指数计数法，指定小数点后有几位
+        n.toExponential(1);   //"1.2e+5"
+
+        n.toExponential(3);   //"1.235e+5"
+
+        //指定有效数字
+        n.toPrecision(4);   //"1.235e+5"
+
+        n.toPrecision(7);   //"123456.8"
+
+        n.toPrecision(10);   //"123456.7890
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

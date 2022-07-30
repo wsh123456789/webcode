@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跟随鼠标移动的天使</title>
+    <style>
+        img {
+            position: absolute;
+            top: 0px;
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://img-blog.csdnimg.cn/5b7f9fc69ca246b48f3ef50d9005f33f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Zi_5peL6KaB5q-V5Liafg==,size_9,color_FFFFFF,t_70,g_se,x_16" alt="">
+    <script>
+        var img  = document.querySelector('img');
+        document.addEventListener('mouseover',function(e) {
+            //千万不要忘记加px值
+            img.style.left = e.pageX-40+'px';
+            img.style.top = e.pageY+50+'px';
+        })
+    </script>
+</body>
+</html>

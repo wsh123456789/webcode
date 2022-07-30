@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态生成表格-创建学生数据</title>
+    <!-- 案例分析 -->
+    <!-- (1) 因为里面的学生数据都是动态的，我们需要js动态生成。这里我们模拟数据，自己定义好数据。数据我们采取对象形式存储 -->
+    <!-- (2) 所有的数据都是放到tbody里面的行里面-->
+    <!-- (3) 因为行很多，我们需要循环创建多个行(对应多少人)-->
+    <!-- (4) 每个行里面有很多个单元格(对应里面的数据)，所以还继续使用循环创建多个单元格，并且把数据存入里面(双重for循环)-->
+    <!-- (5) 最后一列单元格是删除，需要单独创建单元格-->
+
+    <style>
+        table {
+            width: 500px;
+            margin: 100px auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        
+        td,
+        th {
+            border: 1px solid #333;
+        }
+        
+        thead tr {
+            height: 40px;
+            background-color: #ccc;
+        }
+    </style>
+
+</head>
+
+<body>
+    <table cellspacing="0">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>科目</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        //学生数据
+        var datas = [{
+            name: '卫英络',
+            subject: 'JavaScript',
+            score: 100
+        }, {
+            name: '弘历',
+            subject: 'JavaScript',
+            score: 98
+        }, {
+            name: '傅亨',
+            subject: 'JavaScript',
+            score: 90
+        }, {
+            name: '小华',
+            subject: 'JavaScript',
+            score: 80
+        }, {
+            name: '小珍',
+            subject: 'JavaScript',
+            score: 100
+        }];
+        // 二.往body里面创建行，有几个人(通过数组的长度可知)我们就创建几行
+        var tbody = document.querySelector('tbody');
+        for (var i = 0; i < datas.length; i++) { //外面的for循环管行 tr
+            // 1.创建行
+            var tr = document.createElement('tr');
+            // 2.将行添加到tbody里面
+            tbody.appendChild(tr);
+            // 3.行里面创建单元格 td 单元格的数量取决于每个对象里面的属性个数 for循环遍历得到
+            for (var k in datas[i]) { //里面的行管列，单元格td  var k in obj遍历对象 datas[i]
+                //创建单元格
+                var td = document.createElement('td');
+                //把对象里面的值给td
+                // console.log(datas[i][k]); datas[i][k]得到的是属性值
+                td.innerHTML = datas[i][k];
+                tr.appendChild(td); //将单元格添加到行里面,
+            }
+            // 三.创建有删除两个字的单元格
+            var td = document.createElement('td');
+            td.innerHTML = '<a href="javascript:;">删除</a>';
+            tr.appendChild(td); //将td插入到行里
+        }
+        // 四.删除操作开始
+        var as = document.querySelectorAll('a');
+        for (var i = 0; i < as.length; i++) {
+            as[i].onclick = function() {
+                //点击a 删除当前a所在的行(链接的爸爸的爸爸) node.removeChild(child)
+                tbody.removeChild(this.parentNode.parentNode);
+
+            }
+        }
+
+        // for(var k in obj){    遍历对象
+        //     k得到的是属性名
+        //     obj[k]得到的是属性值
+        // }
+    </script>
+</body>
+
+</html>

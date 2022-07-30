@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    //配置简化url 
+    axios.default.baseURL = 'http://127.0.0.1:8000';
+    axios.get('[目标地址]/server', {
+        <!-- url参数 -->
+        params: {
+            a: 100,
+            b: 200
+        },
+        <!-- 请求头信息 -->
+        headers: {
+            c: 300,
+            d: 400
+        }
+    })
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 版心 */
+        .w {
+            width: 980px;
+            margin: 0 auto;
+        }
+
+        /* 头部样式 */
+        .head {
+            height: 200px;
+            background-color: teal;
+        }
+
+        /* 内容区域样式 */
+        .banner {
+            height: 450px;
+            background-color: red
+        }
+
+        /* sidebar是侧边栏 */
+        .sidebar {
+            position: absolute;
+            top: 300px;
+            right: 200px;
+            display: inline-block;
+            width: 40px;
+            height: 80px;
+            background-color: cyan;
+            text-align: center;
+        }
+
+        /* 侧边栏 “返回顶部”字体 */
+        .sidebar span {
+            display: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* 主体div样式 */
+        .zhuti {
+            height: 300px;
+            background-color: violet;
+        }
+
+        /* 底部样式 */
+        .footer {
+            height: 700px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">广告<br><br>
+        <span id="returns">返回顶部</span>
+    </div>
+    <div class="head w">头部区域</div>
+    <div class="banner w">banner区域</div>
+    <div class="zhuti w">主体区域</div>
+    <div class="footer w">尾部区域</div>
+
+    <script>
+        // Js代码部分
+        var sidebar = document.querySelector('.sidebar')
+        var banner = document.querySelector('.banner')
+        var bannerTop = banner.offsetTop;
+
+        // 获取 主体 区域的事件源
+        var zhuti = document.querySelector('.zhuti');
+        var span = document.querySelector('span');
+        var zhutiTop = zhuti.offsetTop;
+        // console.log(bannerTop) // 200 
+        // banner.offestTop 就是被卷去头部的大小 一定要写到滚动的外面
+        // 当我们侧边栏固定定位之后应该变化的数值
+        var sidebarTop = sidebar.offsetTop - bannerTop;
+        document.addEventListener('scroll', function () {
+            // console.log(window.pageYOffset)
+            if (window.pageYOffset >= bannerTop) {
+                sidebar.style.position = 'fixed';
+                sidebar.style.top = sidebarTop + 'px';
+            } else {
+                sidebar.style.position = 'absolute';
+                sidebar.style.top = 300 + 'px';
+            }
+
+            // 当到底主题区域的时候,显示span的内容
+            if (window.pageYOffset >= zhutiTop) {
+                span.style.display = 'block';
+            } else {
+                span.style.display = 'none';
+            }
+        })
+        // 封装了一个动画js文件
+        function animation(obj, target, fn1) {
+            // console.log(fn1);
+            // fn是一个回调函数，在定时器结束的时候添加
+            // 每次开定时器之前先清除掉定时器
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                // 步长计算公式  越来越小
+                // 步长取整
+                var step = (target - obj.pageYOffset) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (obj.pageYOffset == target) {
+                    clearInterval(obj.timer);
+                    // 如果fn1存在，调用fn
+                    if (fn1) {
+                        fn1();
+                    }
+                } else {
+                    // 每30毫秒就将新的值给obj.left
+                    window.scroll(0, obj.pageYOffset + step);
+                }
+            }, 30)
+        }
+
+        // 获取返回顶部的事件 点击触发
+        var returns = document.querySelector('#returns');
+        returns.addEventListener('click', function () {
+            // alert(111);
+            // window.scroll(x,y) 可以返回顶部
+            // window.scroll(0,0);
+            animation(window, 0)
+        })
+    </script>
+</body>
+
+</html>

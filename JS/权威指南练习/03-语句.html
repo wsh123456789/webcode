@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        //if语句
+        i = 1;
+        j = 2;
+        if (i == j)
+            console.log("i equs j");
+        else
+            console.log("i dosent equal j");
+
+        //switch语句
+        switch (n) {
+            case 1: //如果n ===1从这里开始
+                //执行代码块1
+                break;  //停止执行switch语句
+            case 2: //如果n ===2从这里开始
+                //执行代码块2
+                break;
+            case 3:
+                //执行代码块3
+                break;
+            default: //如果所有条件都不匹配
+                //执行代码块4
+                break;
+        }
+
+        // for循环
+        var i, j;
+        for (i = 0, j = 10; i < 10; i++, j--)
+            console.log(i * j);
+
+        //for/in循环
+        for (var p in o) //将属性的名字赋值给变量 p
+            console.log(o[p]); //输出每一个属性的值
+
+        var o = { x: 1, y: 2, z: 3 };
+        var a = [], i = 0;
+        for (a[i++] in o) /*empty*/;
+
+        for (i in a) console.log(i)
+        //throw抛出异常
+        function fac(x) {
+            if (x < 0) throw new Error("x不能是负数");  //如果输入参数是非法的，则抛出一个异常。JS解释器会立即停止当前正在执行的逻辑，并跳转至就近的异常处理程序。
+            for (var f = 1; x > 1; x--)                //否则，计算出一个值，并正常返回它    
+                f *= x;
+            return f;
+        };
+        console.log(fac(2));
+        // console.log(fac(-1));
+
+        //try/catch/finally
+        //     try{
+        //      //通常来讲，这里的代码会从头执行到尾而不会产生任何问题
+        //     //但有时会抛出一个异常，要么是由throw语句直接抛出异常
+        //    //要么是通过调用一个方法间接抛出异常
+        //   }
+        //   catch(e){
+        //     //当且仅当try语句块抛出了异常，才会执行这里的代码
+        //     //这里可以通过局部变量e来获得对error对象或者抛出的其他值的引用
+        //     //这里的代码块可以基于某种原因处理这个异常，也可以忽略这个异常
+        //     //还可以通过throw语句重新抛出异常
+        //    }
+        //   finally{
+        //    //不管try语句块是否抛出了异常，这里的逻辑总是会执行，终止try语句块的方法有：
+        //      1.正常终止，执行完语句块的最后一条语句
+        //      2.通过break、continue或return语句终止
+        //      3.抛出一个异常，异常被catch从句捕获
+        //      4.抛出一个异常，异常未被捕获，继续向上传播
+        //        }
+        try {
+            //要求用户输入一个数字
+            var n = Number(prompt("请输入一个正数", ""));
+            //假设输入是合法的，计算这个数的阶乘
+            var f = fac(n);
+            //显示结果
+            alert(n + "!=" + f);
+        }
+        catch (ex) {
+            //如果输入不合法，将执行这里的逻辑
+            alert(ex);  //输入-3，出现alert("x不能是负数");
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

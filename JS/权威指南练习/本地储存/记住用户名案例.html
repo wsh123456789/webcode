@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+ 
+<body>
+    <input type="text" class="text">
+    <input type="checkbox" name="" id="" class="cbx"><label for="">记住用户名</label>
+    <script>
+        // 获取元素
+        var text = document.querySelector('.text');
+        var cbx = document.querySelector('.cbx');
+        // 如果浏览器存储有username的话就赋值给文本框并且选中按钮
+        if (localStorage.getItem('username')) {
+            text.value = localStorage.getItem('username');
+            cbx.checked = true;
+        }
+        // 如果选项框改变的话，判断选项框是否被选中，如果选中就存储文本框的值
+        cbx.addEventListener('change', function() {
+            // 如果选中就存储值
+            if (cbx.checked) {
+                localStorage.setItem('username', text.value)
+            }
+            // 如果没有选中就移除值
+            else {
+                localStorage.removeItem('username')
+            }
+        })
+    </script>
+</body>
+ 
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+</head>
+<body>
+    <a href="https://www.baidu.com/" title="aaaaa" data-index="1">bbbbb</a>
+    <span>123</span>
+    <script>
+        $(function() {
+            //element.prop('属性名') 获取元素固有属性值
+            console.log($('a').prop('href'));
+            $('a').prop('title','ccccc');
+            //element.attr('属性名') 获取元素自定义属性值
+            console.log($('a').attr('data-index'));
+            $('a').attr('data-index',4);
+            console.log($('a').attr('data-index'));
+            // 数据缓存 data() 数据放在内存里边 页面刷新失效
+            $('span').data('uname', 'andy');
+            console.log($('span').data('uname'));
+            console.log($('a').data('index'));
+
+        })
+    </script>
+</body>
+</html>

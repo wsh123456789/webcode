@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin-top: 0;
+            margin-left: 0;
+        }
+ 
+        body {
+            padding: 100px;
+        }
+        textarea {
+            width: 200px;
+            height: 100px;
+            border: 1px solid pink;
+            outline: none;
+            /* resize禁止放大缩小文本域 */
+            resize: none;
+        }
+        ul {
+            margin-top: 50px;
+        }
+        li {
+            width: 300px;
+            padding: 5px;
+            background-color: rgb(238, 198, 205);
+            color: red;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        li a {
+            float: right;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <textarea name="" id=""></textarea>
+    <button>发布</button>
+    <ul>
+    </ul>
+    <script>
+        // 1. 获取元素
+        var text = document.querySelector('textarea');
+        var btn = document.querySelector('button');
+        var ul = document.querySelector('ul');
+        // 2. 注册事件
+        btn.onclick = function () {
+            if (text.value == '') {
+                alert('你没有输入内容！');
+                return false;
+            } else {
+                // 创建元素
+                var li = document.createElement('li');
+                // 先有li才能赋值
+                li.innerHTML = text.value ;
+                // 添加元素
+                // ul.appendChild(li);  //添加在后面
+                ul.insertBefore(li, ul.children[0]);  //添加在前面
+            }
+            text.value = '';  //内容发送后文本域清空
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="ys" class="demo" index="1">哈哈哈哈哈</div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <ol>
+        <li>hh</li>
+        <li>hh</li>
+        <li>hh</li>
+        <li>hh</li>
+        <li>hh</li>
+    </ol>
+    <button id="btn">点击</button>
+    <div>
+        <input type="text" value="手机">
+    </div>
+
+    <script>
+        var div = document.getElementById('ys');
+        console.log(div);
+        console.dir(div);
+
+        var lis = document.getElementsByTagName('li');
+        console.log(lis);
+        console.log(lis[0]);
+
+        var ols = document.getElementsByTagName('ol');
+        console.log(ols[0].getElementsByTagName('li'));
+
+        var cn = document.getElementsByClassName('demo');
+        console.log(cn);
+        //返回指定选择器的第一个对象
+        var qs = document.querySelector('.demo');
+        //返回所有
+        var qsa = document.querySelectorAll('li');
+        console.log(qs);
+        console.log(qsa);
+
+        //获取body元素
+        var bd = document.body;
+        //获取html元素
+        var ht = document.documentElement;
+
+        //事件
+        //    onclick   鼠标点击左键触发
+        //    onmouseover    鼠标经过触发          
+        //    onmouseout    鼠标离开触发        
+        //    onmousemove   鼠标移动触发
+        //    onfocus    获得鼠标焦点触发            
+        //    onblur     失去鼠标焦点触发
+        //    onmouseup     鼠标弹起触发            
+        //    onmousedown    鼠标按下触发
+        //    contextmenu    控制什么时候显示上下文菜单
+        //    selectstart    开始选中
+        var btn = document.getElementById('btn');
+        btn.onclick = function () {
+            alert('回应');
+        }
+
+        //innerText获取或修改元素，不识别标签
+        // div.innerText =
+        //innerHtml获取或修改元素，识别标签
+        // div.innerHtml = 
+
+        //属性操作 ：src、href、id、alt、title、type、value、checked、selected、disabled
+        console.log(div.id);   //ys => 获取id属性
+        div.id = 'demo';
+        console.log(div.id);// demo 
+
+        //获取getAttribute('属性') 修改setAttribute 删除removeAttribute 检测是否存在
+        console.log(div.getAttribute('id'));//demo
+        div.setAttribute('id', 'index');
+        console.log(div.getAttribute('id'));//index
+        console.log(div.getAttribute('index'));//1
+        div.removeAttribute('index');
+        console.log(div.getAttribute('index'));//null
+        console.log(div.hasAttribute('index'));//false
+
+        //自定义属性 data-开头
+        //<div data-time=""></div>
+        //div.dataset.time获取属性值或div.dataset['time']
+        //如果属性是多个-链接的用驼峰命名获取
+        //<div data-time-index=""></div>
+        //div.dataset.timeIndex获取属性值或div.dataset['timeIndex']
+
+        //节点
+        // element.nodeType 节点属性类型
+        // Element.parentNode父节点
+        // parentNode.childNodes(标准)/children(非标准) 子节点 ol.childNode =>  li标签
+        // parentNode.firstElementChild/lastElementChild  第一个/最后一个子节点
+        // parentNode.children[0]/[parentNode.children.length-1] 第一个/最后一个子节点
+        // node.nextSibling 下一个兄弟节点 node.previousSibling 上一个兄弟节点
+        // node.nextElementSibling 下一个兄弟元素节点 node.previousElementSibling 上一个兄弟元素节点
+        // document.createElement('') 创建节点  node.appendChild(child) node为父级
+        var li = document.createElement('li');
+        var ul = document.querySelector('ul');
+        ul.appendChild(li);
+        //在父节点的子节点的前边插入元素 node.insertBefore(待插入的子节点,指定子节点)
+        ul.insertBefore(li, ul.firstElementChild);
+        // 删除节点 node.removeChild(child)
+        // 克隆节点 node.cloneNode() 浅拷贝 只复制标签不复制内容
+        var lili = ul.children[1].cloneNode(true); //里边为true为深拷贝
+        ul.appendChild(lili);
+
+        // 三种动态创建元素区别
+        //1. document.write()创建元素  如果页面文档流加载完毕，再调用这句话会导致页面重绘
+        // var btn = document.querySelector('button');
+        // btn.onclick = function() {
+        //     document.write('<div>123</div>');
+        // }
+
+        //2. innerHTML  创建元素 是将内容写入某个DOM节点，不会导致页面全部重绘  创建多个元素效率更高(不要采取拼接字符串，采取数组的形式拼接)，结构稍微复杂
+        var inner = document.querySelector('.inner');
+        // for (i = 0; i <= 100; i++) {
+        //     inner.innerHTML += '<a href="#">百度</a>';
+        // }
+        var arr = [];
+        for (var i = 0; i <= 100; i++) {
+            arr.push('<a href="#">百度</a>');
+        }
+        inner.innerHTML = arr.join(''); //join把数组转换为字符串
+
+        //3. document.createElement() 创建元素 创建多个元素效率稍低一点的，但是结构更清晰
+        var create = document.querySelector('.create');
+        for (i = 0; i <= 100; i++) {
+            var a = document.createElement('a');
+            create.appendChild(a);
+        }
+
+        // 样式操作
+        //style 行内样式操作
+        div.style.background = 'red';
+        //className 修改属性调用的class
+        // ys.className = '类名';
+
+        //焦点onfocus  onblur
+        var text = document.querySelector('input');
+        //注册事件，获得焦点事件  onfocus
+        text.onfocus = function () {
+            console.log('得到了焦点');
+            if (text.value === "手机") {
+                text.value = "";
+            }
+
+        }
+        //注册事件  失去了焦点事件  onblur
+        text.onblur = function () {
+            if (text.value === "") {
+                text.value = "手机";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

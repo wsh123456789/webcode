@@ -1,22 +1,28 @@
 const express = require("express");
 
-const server = express();
+const app = express();
 
 // express => Node => web server: http请求 request : response
 // http请求：三次握手：request : response
-server.post('/login', function (req, res) {
-    console.log(req, res)
+app.get('/api/login', function (req, res) {
+    // console.log(req, res)
     // reg (username, password)
-    // if(username == wusihao' && password = '123456') {
+    // if(username == 'wusihao' && password == '123456') {
     //  return true
     // } else { return false}
   
     //  return res;
     // res.send('Got a POST request')
+    const obj = {
+      login: true,
+      username: 'wusihao'
+    }
+
+    res.send(JSON.stringify(obj));
   })
 
-server.use('', express.static('./static'));
+app.use(express.static('public'));
 
-server.listen(8080, function () { //在8080端口启动
-    console.log('Example app listening on port 8080');
+app.listen(3000, function () { //在端口启动
+    console.log('http://0.0.0.0:3000');
 })

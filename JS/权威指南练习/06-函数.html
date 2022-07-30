@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //函数定义
+        function fname(value) {
+            //函数体
+            return value * value;
+        }
+
+        //嵌套函数
+        function hypotenuse(a, b) {
+            function square(x) { return x * x }
+            return Math.sqrt(square(a) + square(b));
+        }
+
+        //函数调用
+        // printprops({ x: 1 });
+        // var total = distance(0, 0, 2, 1) + distance(2, 1, 3, 5);
+        // var probability = factorial(5) / factorial(13);
+
+        //实参形参
+        function getPropertyNames(o, a) {
+            a = a || []; //需注意使用||a必须预先声明，否则报错；此处形参已有则无需声明
+            for (var pro in o) {
+                a.push(pro);
+            }
+            return a;
+        }
+        //
+        function f(x) {
+            console.log(x);
+            arguments[0] = null;
+            console.log(x);
+        }
+        var a = 12;
+        f(12);
+        var b = [1, 2, 3];
+        f(b);
+        //callee
+        //length
+        //callee：指代当前正在执行的函数，在匿名函数中通过callee来递归地调用自身比较有用：
+        var fact = function (x) {
+            if (x <= 1) {
+                return 1;
+            }
+            return x * arguments.callee(x - 1);
+        };
+
+        //自定义函数属性
+        function fact(n) {
+            if (isFinite(n) && n > 0 && n == Math.round(n)) {
+                if (!(n in fact)) {
+                    fact[n] = n * fact(n - 1); //保存了每次的计算结果
+                }
+                return fact[n];
+            }
+            else {
+                return NaN;
+            }
+        }
+        fact[1] = 1;
+        fact(10);
+        for (var v in fact) {
+            console.log(v + ': ' + fact[v]);
+        }
+        //闭包
+        var uniqueInteger = (function () {
+            var counter = 0;
+            return function () {
+                console.log(counter);
+                counter++;
+            };
+        })();
+        uniqueInteger(); //0
+        uniqueInteger(); //1
+        uniqueInteger(); //2
+
+        function counter() {
+            var n = 0;
+            return {
+                count: function () { return n++; },
+                reset: function () { n = 0; }
+            };
+        }
+        var c = counter();
+        var d = counter();
+        c.count;    // => 0
+        d.count;    // => 0:互不干扰
+        c.reset;
+        c.count;    // => 0:c被reset重置
+        d.count;    // => 1;d没有被重置
+
+        //一个函数内部的闭包是共享这个函数内定义的局部变量的，而不会说每个闭包都各自复制一份局部变量，注意每个闭包的作用域链上指向外部函数的变量对象都是同一个，即位于外部函数作用域链最前面的变量对象。
+        function constfuncs() {
+            var funcs = [];
+            for (var i = 0; i < 10; i++) {
+                funcs[i] = function () {
+                    return i;
+                };
+            }
+            return funcs;
+        }
+        var funcs = constfuncs();
+        console.log(funcs[5]()); //10
+        //bind
+        function bind(f, o) {
+            if (f.bind) {
+                return f.bind(o);
+            }
+            return function () {
+                return f.apply(o, arguments);
+            }
+        }
+        function func(y) {
+            return this.x + y;
+        }
+        var o = {
+            x: 1
+        };
+        var resfunc = bind(func, o);
+        var res = resfunc(2); //3
+        //高阶函数
+        function compose(f, g) {
+            return function () {
+                return f.call(this, g.apply(this, arguments));
+            }
+        }
+
+        var square = function (x) { return x * x; };
+        var sum = function (x, y) { return x + y; };
+        var squareOfSum = compose(square, sum);
+        squareOfSum(2, 3); //25
+
+        //不完全函数
+        //实现一个工具函数将类数组对象（或对象）转换为真正的数组
+        //在后面的示例代码中用到了这个方法将arguments对象转换为真正的数组
+        function array(a, n) { return Array.prototype.slice.call(a, n || 0); }
+        //这个函数的实参传递至左侧
+        function partialLeft(f /*,...*/) {
+            var args = arguments; //保存外部的实参数组
+            return function () {   //并返回这个函数
+                var a = array(args, 1); //开始处理外部的第1个args
+                a = a.concat(array(arguments)); //然后增加所有的内部实参
+                return f.apply(this, a); //然后基于这个实参列表调用f()
+            };
+        }
+        //这个函数的实参传递至右侧
+        function partialRight(f/*,...*/) {
+            var args = arguments; //保存外部实参数组
+            return function () {
+                var a = array(arguments); //从内部参数开始
+                a = a.concat(array(args, 1)); //然后从外部第1个args开始添加
+                return f.apply(this, a); //最后基于这个实参列表调用f()
+            };
+        }
+        //这个函数的实参被用做模板
+        //实参列表中的undefined值都被填充
+        function partial(f/*,...*/) {
+            var args = arguments; //保存外部实参数组
+            return function () {
+                var a = array(args, 1); //从外部args开始
+                var i = 0, j = 0;
+                //遍历args,从内部实参填充undefined值
+                for (; i < a.length; i++)
+                    if (a[i] === undefined) a[i] = arguments[j++];
+                //现在将剩下的内部实参都追加进去
+                a = a.concat(array(arguments, j))
+                return f.apply(this, a);
+            };
+        }
+        //这个函数带有三个实参
+        var f = function (x, y, z) { return x * (y - z); };
+        //注意这三个不完全调用之间的区别
+        partialLeft(f, 2)(3, 4)  //=>-2:绑定第一个实参：2*(3 - 4
+        partialRight(f, 2)(3, 4) //=>6:绑定最后一个实参：3*(4 -2)
+        partial(f, undefined, 2)(3, 4) //=>-6:绑定中间的实参：3*(2-4)
+
+        //记忆函数
+        //返回f()的带有记忆功能的版本
+        //只有当f()的实参的字符串表示都不相同它才会工作
+        function memorize(f) {
+            var cache = {}; //将值保存在闭包内
+            return function () {
+                //将实参转换为字符串形式，并将其用做缓存的键
+                var key = arguments.length + Array.join.call(arguments, ",");
+                if (key in cache) return cache[key];
+                else return cache[key] = f.apply(this, arguments);
+            };
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

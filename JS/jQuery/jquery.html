@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div>aaaa</div>
+    <script>
+        //jQuery顶级对象$ 相当于jQuery的别名
+        //DOM对象
+        var demo = document.querySelector('video');
+        //jQuery对象
+        $('div');
+        //DOM对象转换为jQuery对象
+        $(demo);
+        //jQuery对象转换为DOM对象
+        $('div')[0];
+        $('div').get(0);
+        // $('div').hide();
+        //等着DOM结果渲染完毕完后执行 相当于原生JS的DOMContentLoaded
+        // 方法1
+        // $(document).ready(function() {
+        //     $('div').hide();
+        // })
+        // 方法2
+        $(function() {
+            $('div').hide();
+        })
+    </script>
+    <div></div>
+   
+</body>
+</html>

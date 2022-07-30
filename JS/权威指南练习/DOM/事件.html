@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+
+</head>
+
+<body>
+    <button type="button">1.传统方式注册事件</button>
+    <button type="button">2.方法监听注册事件</button>
+    <ul>
+        <li>商品介绍</li>
+        <li>规格与包装</li>
+        <li>售后保障</li>
+        <li>商品评价</li>
+        <li>手机社区</li>
+    </ul>
+
+    <script type="text/javascript">
+        //鼠标事件
+        //    onclick   鼠标点击左键触发
+        //    onmouseover    鼠标经过触发(包括子盒子)
+        //    onmouseenter   鼠标经过触发(只包括自身)
+        //    onmouseout    鼠标离开触发
+        //    onmousemove   鼠标移动触发
+        //    onfocus    获得鼠标焦点触发
+        //    onblur     失去鼠标焦点触发
+        //    onmouseup     鼠标弹起触发
+        //    onmousedown    鼠标按下触发
+        //    contextmenu    控制什么时候显示上下文菜单
+        //    selectstart    开始选中
+
+        var btns = document.querySelectorAll('button');
+        btns[0].onclick = function () {
+            alert('hi world!');
+        }
+        btns[0].onclick = function () {
+            alert('hello world!');
+            btns[0].onclick = null;
+        }
+        //2.方法监听注册事件  element.addEventListener(类型,行为,true/false)不写默认false 
+        //如果值为true 那么处于捕获状态,如果值为false那么处于事件冒泡状态
+        //捕获状态从大到小，冒泡从儿子到父亲
+        //1.里面的事件类型是字符串 必定加引号 且不带on
+        //2.同一个元素 同一个事件可以添加多个监听器(事件处理程序)
+        btns[1].addEventListener('click', fn = function (e) {
+            alert(22);
+            //返回触发事件对象 e.target
+            console.log(e.target);
+            //返回触发事件对象类型
+            console.log(e.type);
+            //阻止事件默认行为
+            e.preventDefault();
+            //阻止冒泡
+            e.stopPropagation();
+            //删除事件 removeEventListener
+            btns[1].removeEventListener('click', fn);
+        })
+
+        btns[1].addEventListener('click', function () {
+            alert(33);
+        })
+
+        //事件委托
+        var ul = document.querySelector('ul');
+        ul.addEventListener('click', function (e) {
+            alert(e.target.innerText);
+            e.target.style.background = 'pink';
+
+        })
+    // 页面区域
+    // e.pageX 鼠标页面区域的X的位置
+    // e.pageY 鼠标页面区域的Y的位置
+
+    // 可视区域
+    // e.clientX 鼠标可视区域的X的位置
+    // e.clientY 鼠标可视区域的Y的位置
+
+    // 被点击盒子
+    // e.layerX 鼠标在该盒子中的X位置
+    // e.layerY 鼠标在该盒子中的Y位置
+
+    //相对于电脑屏幕的
+    // e.screenX
+    // e.screenY
+    
+    //键盘事件
+    // onkeyup  松开键盘触发
+    // onkeydown  按下触发
+    // onkeypress 按下触发,但不包括功能键比如ctrl和shift 箭头等
+    // 如果用监听器addEventListener不需要加on
+    // 执行顺序 keydown > keypress > keyup
+    document.onkeyup = function() {
+        console.log('松开触发');
+    }
+
+    document.onkeydown = function(e) {
+        // 返回用户按下案件的ASCII值 但是keyup 和 keydown 不区分大小写 ，都按大写字母返回
+        console.log(e.keyCode);  //按下a 返回65
+        console.log('按下触发down');
+    }
+    // keypress区分大小写
+    document.onkeypress = function(e) {
+        console.log(e.keyCode); //按下a 返回97
+        console.log('按下触发press');
+    }
+    </script>
+</body>
+
+</html>
