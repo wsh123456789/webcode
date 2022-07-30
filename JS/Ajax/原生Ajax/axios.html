@@ -22,5 +22,46 @@
             d: 400
         }
     })
+
+    axios.post('[目标地址]/server',   <!-- 请求体 -->data: {
+        username: 'aaa',
+        password: 'bbb'
+    },
+    {
+        <!-- url参数 -->
+        params: {
+            a: 100,
+            b: 200
+        },
+        <!-- 请求头信息 -->
+        headers: {
+            c: 300,
+            d: 400
+        }
+      
+        
+    })
+
+    <!-- //函数发送请求 -->
+        btn[1].onclick = function() {
+            axios({
+                <!-- //请求方法 -->
+                method: 'POST',
+                url: '/server',
+                params: {
+                    a: 100,
+                    b: 200
+                },
+                headers: {
+                    c: 300,
+                    d: 400
+                },
+                <!-- 请求体 -->
+                data: {
+                    username: 'aaa',
+                    password: 'bbb'
+                }
+            })
+        }
 </body>
 </html>
