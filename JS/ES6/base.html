@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.声明
+        // let所声明的变量，只在let命令所在的代码块内有效。
+        // const声明一个只读的常量。一旦声明，常量的值就不能改变。
+        // 定义数组或对象时,可以对其元素值进行修改
+        // 2.数组
+        // 解构赋值 如果解构不成功，变量的值就等于undefined。只要某种数据结构具有 Iterator 接口，都可以采用数组形式的解构赋值。
+        let [a, b, c] = [1, 2, 3];
+        console.log(a, b, c);
+        // 3.模板字符串
+        let str = `aa
+                   aa`;
+        let head = 'head';
+        let end = `${head} end`;
+        console.log(end);
+        // 4.简化对象写法
+        let name = 'wsh';
+        const hanshu = {
+            name,
+            out() {
+                console.log("简化");
+            }
+        }
+        console.log(hanshu);
+        // 5.箭头函数
+        let fn = (a, b) => {
+            return a + b;
+        }
+        console.log(fn(1, 2));
+        // (1) this是静态的。this始终指向函数声明时所在作用域下的this值
+        function getName() {
+            console.log(this.name);
+        }
+        let getName2 = () => {
+            console.log(this.name);
+        }
+        window.name = 'wsh';
+        const nameDemo = {
+            name: "hhh"
+        }
+        getName(); //wsh
+        getName2();//wsh
+
+        getName.call(nameDemo); //hhh
+        getName2.call(nameDemo);//wsh
+
+        // (2) 不能作为构造对象 (不能new)
+        // (3) 不能使用 arguments 变量
+        // (4) 箭头函数可以简写 
+        // 只有一个参数 ：let add = (n) => {} 等价于 let add = n => {}
+        // 只有一个语句 : let add = (n) => n+n;
+        // 6. rest参数 (形参)
+        function fn1(a, b, ...args) {
+            console.log(a);
+            console.log(b);
+            console.log(args);
+        }
+        fn1(1, 2, 3, 4, 5, 6, 7, 8);
+        // ...扩展运算符(实参) 将数组转换为逗号分隔的序列
+        const tf = ['a','b','c'];
+        function fn2() {
+            console.log(arguments);
+        }
+        fn2(tf);
+        fn2(...tf);
+        // iterator迭代器
+        // for...of遍历
+        for(let v of tf){
+            console.log(v);// a b c
+        } 
+        let iterator = tf[Symbol.iterator]();
+
+        // 调用对象的next方法
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+
+        // 生成器 yield分割代码块
+        function * gen(args){
+            console.log(args);
+            // console.log("hello");
+            let one = yield '111111111';
+            // console.log("world");
+            console.log(one);
+            let two = yield '222222222';
+            // console.log("hahaha");
+            console.log(two);
+            let three = yield '333333333';
+            console.log(three);
+        }
+
+        let iterator1 = gen('aaa');
+        console.log(iterator1.next('bbb'));
+        console.log(iterator1.next('ccc'));
+        console.log(iterator1.next('ddd'));
+        console.log(iterator1.next('eee'));
+        // console.log(iterator1.next(4444444));
+    </script>
+</body>
+
+</html>

@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.9"
   }
 }
