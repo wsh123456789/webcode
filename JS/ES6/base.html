@@ -68,7 +68,7 @@
         }
         fn1(1, 2, 3, 4, 5, 6, 7, 8);
         // ...扩展运算符(实参) 将数组转换为逗号分隔的序列
-        const tf = ['a','b','c'];
+        const tf = ['a', 'b', 'c'];
         function fn2() {
             console.log(arguments);
         }
@@ -76,9 +76,9 @@
         fn2(...tf);
         // iterator迭代器
         // for...of遍历
-        for(let v of tf){
+        for (let v of tf) {
             console.log(v);// a b c
-        } 
+        }
         let iterator = tf[Symbol.iterator]();
 
         // 调用对象的next方法
@@ -88,7 +88,7 @@
         console.log(iterator.next());
 
         // 生成器 yield分割代码块
-        function * gen(args){
+        function* gen(args) {
             console.log(args);
             // console.log("hello");
             let one = yield '111111111';
@@ -107,6 +107,9 @@
         console.log(iterator1.next('ddd'));
         console.log(iterator1.next('eee'));
         // console.log(iterator1.next(4444444));
+
+        // globalThis 始终指向全局对象
+        console.log(globalThis);
     </script>
 </body>
 

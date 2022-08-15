@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = '<a href="https://www.baidu.com">百度</a>';
+
+        const reg1 = /<a href="(.*)">(.*)<\/a>/;
+        // 匹配并存入groups
+        const reg2 = /<a href="(?<url>.*)">(?<text>.*)<\/a>/;
+
+        const result1 = reg1.exec(str);
+        const result2 = reg2.exec(str);
+
+        console.log(result1);
+        console.log(result2);
+
+        // 断言 (?=)
+        let str1 = 'JS123daaa1111ew';
+        const reg3 = /\d+(?=e)/;
+        const result3 = reg3.exec(str1);
+        console.log(result3);
+
+        //反向断言 (?<=)
+        const reg4 = /(?<=a)\d+/;
+        const result4 = reg4.exec(str1);
+        console.log(result4);
+
+        // dotAll模式 后边加s之后 .可匹配包括换行的任意字符
+    </script>
+</body>
+</html>

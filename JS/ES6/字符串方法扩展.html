@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // includes()：返回布尔值，表示是否找到了参数字符串。
+        // startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。
+        // endsWith()：返回布尔值，表示参数字符串是否在原字符串的尾部。
+        // 这三个方法都支持第二个参数，表示开始搜索的位置。
+        let s = 'Hello world!';
+
+        console.log(s.startsWith('world', 6));  // true
+        console.log(s.endsWith('Hello', 5));    // true
+        console.log(s.includes('Hello', 6));    // false
+
+        // repeat方法返回一个新字符串，表示将原字符串重复n次\
+        // ,参数如果是小数，会被取整,参数NaN等同于 0 ，如果repeat的参数是字符串，则会先转换成数字。
+        'x'.repeat(3) // "xxx"
+
+        // padStart()用于头部补全，padEnd()用于尾部补全。
+        // padStart()和padEnd()一共接受两个参数，第一个参数是字符串补全生效的最大长度，第二个参数是用来补全的字符串。 如果省略第二个参数，默认使用空格补全长度。
+        'x'.padStart(5, 'ab'); // 'ababx'
+        'x'.padStart(4, 'ab'); // 'abax'
+
+        'x'.padEnd(5, 'ab'); // 'xabab'
+        'x'.padEnd(4, 'ab'); // 'xaba'
+
+        // trimStart 和 trimEnd 清除左侧或右侧空格符
+        // trim清除左侧和右侧空格符
+        let str = '    22222    ';
+        console.log(str);
+        console.log(str.trim());
+        console.log(str.trimStart());
+        console.log(str.trimEnd());
+
+        // str.matchAll(regexp) 返回一个将字符串与正则表达式匹配的结果的迭代器
+        const string = "I am learning JavaScript not Java.";
+        const re = /Java[a-z]*/gi;
+
+        let result = string.matchAll(re);
+
+        // for (match of result) {
+        //     console.log(match);
+        // }
+
+        const arr = [...result];
+        console.log(arr);
+
+        // replaceAll()方法，可以一次性替换所有匹配。
+        // 它的用法与replace()相同，返回一个新字符串，不会改变原字符串。 
+        'aabbcc'.replaceAll('b', '_'); // 'aa__cc'
+
+        // at()方法接受一个整数作为参数，返回参数指定位置的字符，支持负索引（即倒数的位置）。
+        const str1 = 'hello';
+        str1.at(1); // "e"
+        str1.at(-1); // "o"
+
+        // String.raw() 该方法返回一个斜杠都被转义（即斜杠前面再加一个斜杠）的字符串，往往用于模板字符串的处理方法。
+
+        String.raw`Hi\n${2 + 3}!`;
+        // 实际返回 "Hi\\n5!"，显示的是转义后的结果 "Hi\n5!"
+
+        String.raw`Hi\u000A!`;
+        // 实际返回 "Hi\\u000A!"，显示的是转义后的结果 "Hi\u000A!"
+        // 如果原字符串的斜杠已经转义，那么String.raw()会进行再次转义。
+        String.raw`Hi\\n`;
+        // 返回 "Hi\\\\n"
+
+        console.log(String.raw`Hi\\n` === "Hi\\\\n") // true
+    </script>
+</body>
+
+</html>

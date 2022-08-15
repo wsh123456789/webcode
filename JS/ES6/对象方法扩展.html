@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Object.is 判断两个值是否完全相等
+        console.log(Object.is(120, 111));
+        // Object.assign 合并对象 后边属性会覆盖前边属性
+        const config1 = {
+            name: 'aaa',
+            age: 18,
+            pass: '123',
+            test: 'test'
+        };
+
+        const config2 = {
+            name: 'bbb',
+            age: 19,
+            pass: '123',
+            test: 'text'
+        };
+
+        console.log(Object.assign(config1, config2));
+
+        // Object.setPrototypeOf 设置原型对象 后者为前者原型 Object.getPrototypeOf 获取原型
+        const school = {
+            name: 'bbb',
+            xq: ['河北', '北京', '深圳']
+        };
+        const city = {
+            xq: ['河北', '北京', '深圳']
+        };
+        Object.setPrototypeOf(school, city);
+        console.log(school);
+        console.log(Object.getPrototypeOf(school));
+
+        // Object.keys() 获取对象所有键名  
+        // Object.values() 获取对象所有的值 
+        // Object.entries()  对象转化为二维数组或map
+        console.log(Object.keys(school));
+        console.log(Object.values(school));
+        console.log(Object.entries(school));
+        // 创建map
+        const m = new Map(Object.entries(school));
+        console.log(m);
+        // Object.getOwnPropertyDescriptors() 返回对象属性的描述的对象
+        console.log(Object.getOwnPropertyDescriptors(school));
+        // Object.fromEntries() 接收一个二维数组或map,转化为对象
+        Object.fromEntries([
+            ['foo', 'bar'],
+            ['baz', 42]
+        ]);     // { foo: "bar", baz: 42 }
+
+        // 对象的属性分成两种：自身的属性和继承的属性
+        // Object.hasOwn()，可以判断是否为自身的属性。
+        const foo = Object.create({ a: 123 });
+        foo.b = 456;
+        // 对象foo的属性a是继承属性，属性b是原生属性。Object.hasOwn()对属性a返回false，对属性b返回true
+        Object.hasOwn(foo, 'a'); // false
+        Object.hasOwn(foo, 'b'); // true
+    </script>
+</body>
+
+</html>

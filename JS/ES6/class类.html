@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // // 手机
+        // function Phone(brand, price) {
+        //     this.brand = brand;
+        //     this.price = price;
+        // }
+
+        // // 添加方法
+        // Phone.prototype.call = function () {
+        //     console.log("我可以打电话");
+        // }
+
+        // // 实例化对象
+        // let Huawei = new Phone('华为', 5999);
+        // Huawei.call();
+        // console.log(Huawei);
+
+        // class
+        class Phone {
+            // 静态变量
+            static name = 'aaa';
+            //私有属性 不可外部直接调用
+            #age;
+            //名字不能修改
+            constructor(brand, price, age) {
+                this.brand = brand;
+                this.price = price;
+                this.#age = age;
+            };
+
+            // 方法必须使用该语法, 不能使用es5 的对象完整形式
+            call() {
+                console.log("我可以打电话");
+            };
+        }
+
+        let iphone = new Phone("iphone", 6999, 18);
+        console.log(iphone);
+        console.log(Phone.name);
+        // console.log(iphone.#age);
+        // 继承
+        class SmartPhone extends Phone {
+            constructor(brand, price, color, size) {
+                super(brand, price);
+                this.color = color;
+                this.size = size;
+            }
+            get price() {
+                console.log("读取");
+            }
+
+            set price(newVal) {
+                console.log("修改");
+            }
+
+            photo() {
+                console.log("拍照");
+            }
+        }
+
+        const xiaomi = new SmartPhone('小米', 1999, '黑色', '5inch');
+        console.log(xiaomi);
+        xiaomi.call();
+        xiaomi.photo();
+        xiaomi.price = 'free';
+        // Object.getPrototypeOf()方法可以用来从子类上获取父类。
+        console.log(Object.getPrototypeOf(xiaomi));
+
+        // 类的 prototype 属性和__proto__属性
+        // 大多数浏览器的 ES5 实现之中，每一个对象都有__proto__属性，指向对应的构造函数的prototype属性。Class 作为构造函数的语法糖，同时有prototype属性和__proto__属性，因此同时存在两条继承链。
+        // （1）子类的__proto__属性，表示构造函数的继承，总是指向父类。
+        // （2）子类prototype属性的__proto__属性，表示方法的继承，总是指向父类的prototype属性。
+        class A {
+        }
+        class B extends A {
+        }
+        B.__proto__ === A // true
+        B.prototype.__proto__ === A.prototype // true
+    </script>
+</body>
+
+</html>

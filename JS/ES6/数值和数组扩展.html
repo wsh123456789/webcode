@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Number.EPSILON 是 JS 表示的最小精度 2.22045e-16
+        console.log(0.1 + 0.2)
+        console.log(0.1 + 0.2 === 0.3)
+
+        function equal(a, b) {
+            if (Math.abs(a - b) < Number.EPSILON) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        console.log(equal(0.1 + 0.2, 0.3));
+
+        // 进制
+
+        // 2
+        let b = 0b1010;
+        console.log(b);
+        // 8
+        let o = 0o777;
+        console.log(o);
+        // 16
+        let x = 0xff;
+        console.log(x);
+
+        // Number.isFinite 检测一个数是否为有限数
+        console.log(Number.isFinite(100));
+        console.log(Number.isFinite(10 / 0));
+        console.log(Number.isFinite(Infinity));
+        // Number.isNaN 检测是否为NaN    Number.parseInt,Number.parseFloat 字符串转数字
+        // Number.isInteger判断一个数是否为整数
+
+        // 新增一个极小的常量Number.EPSILON
+
+        // Number.MAX_SAFE_INTEGER和Number.MIN_SAFE_INTEGER这两个常量，用来表示这个范围的上下限。
+        // Number.isSafeInteger()则是用来判断一个整数是否落在这个范围之内。
+
+        // Math.trunc 将数字小数部分抹掉
+        // Math.sign  判断一个数为正数(1),负数(-1)还是0 (-0) 其他为NaN
+        // Math.cbrt()方法用于计算一个数的立方根。
+        // Math.hypot方法返回所有参数的平方和的平方根。
+        // BigInt 
+        let max = Number.MAX_SAFE_INTEGER;
+        console.log(max + 1);
+        console.log(max + 2);
+        console.log(BigInt(max) + BigInt(2));
+
+        // ** 实现幂运算
+        console.log(2 ** 3); // 8
+
+        // 函数的length属性，将返回没有指定默认值的参数个数。
+        (function (a) { }).length; // 1
+        (function (a = 5) { }).length; // 0
+        (function (a, b, c = 5) { }).length; // 2
+        // 如果设置了默认值的参数不是尾参数，那么length属性也不再计入后面的参数
+        (function (a = 0, b, c) { }).length; // 0
+        (function (a, b = 1, c) { }).length; // 1
+
+        // Array.from()方法用于将两类对象转为真正的数组：类似数组的对象（array-like object）和可遍历（iterable）的对象
+        let arrayLike = {
+            '0': 'a',
+            '1': 'b',
+            '2': 'c',
+            length: 3
+        };
+        let arr2 = Array.from(arrayLike); // ['a', 'b', 'c']
+
+        // Array.of()方法用于将一组值，转换为数组。
+        Array.of(3, 11, 8); // [3,11,8]
+        Array.of(3); // [3]
+        Array.of(3).length; // 1
+
+        // fill方法使用给定值，填充一个数组。
+        ['a', 'b', 'c'].fill(7)
+        // [7, 7, 7]
+
+        // includes检测数组中是否包含某个元素，返回布尔类型
+        const mingzhu = ['西游记', '红楼梦', '三国演义'];
+        // 判断
+        console.log(mingzhu.includes('西游记')); //true
+
+        // keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历。
+        // 它们都返回一个遍历器对象，可以用for...of循环进行遍历
+        for (let index of ['a', 'b'].keys()) {
+            console.log(index);
+        }
+        // 0
+        // 1
+        for (let elem of ['a', 'b'].values()) {
+            console.log(elem);
+        }
+        // 'a'
+        // 'b'
+        for (let [index, elem] of ['a', 'b'].entries()) {
+            console.log(index, elem);
+        }
+        // 0 "a"
+        // 1 "b"
+
+        // at()方法接受一个整数作为参数，返回参数指定位置的字符，支持负索引（即倒数的位置）。
+        
+        // flat 和 faltMap
+        // flat(n) 将多维数组转化为低维数组 n为要降低的维度数
+        const arr = [1, 2, 3, 4, [5, 6, [7, 8, 9]]];
+        console.log(arr.flat(2));
+
+        //flatMap(n) 将map返回值降维度
+    </script>
+
+</body>
+
+</html>
