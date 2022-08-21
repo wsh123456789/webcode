@@ -342,7 +342,7 @@
         Object.defineProperty(o, "x", { value: 2 });
         o.x //=>2
 
-        //现在讲x从数据属性修改为存取器属性
+        //x从数据属性修改为存取器属性
         Object.defineProperty(o, "x", { get: function () { return o; } });
         o.x //=>o
 

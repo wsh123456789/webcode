@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>欢迎来到{{name}}</h2>
+        <button v-on:click="showInfo">点击提示1</button>
+        <!-- 简写方式 -->
+        <button @click="showInfo">点击提示2</button>
+        <!-- 
+            .stop 阻止事件冒泡
+            .prevent 阻止标签默认行为
+            .capture 使用事件捕获模式,即元素自身触发的事件先在此处处理，然后才交由内部元素进行处理
+            .self 只当在 event.target 是当前元素自身时触发处理函数
+            .once 事件将只会触发一次
+            .passive 事件的默认行为立即执行，无需等待事件回调完毕
+        -->
+        <button @click.once="showInfo">事件将只会触发一次</button><br>
+        <div  @click.once="showInfo">
+            <button  @click.stop="showInfo">阻止事件冒泡</button>
+            <button  @click="showInfo">正常事件冒泡</button>
+        </div>
+        
+        <!-- 键盘事件 -->
+        <!-- 
+            回车 => enter
+            删除 => delete 
+            退出 => esc
+            空格 => space
+            换行 => tab (配合keydown使用)
+            上下左右 => up,down,left,right
+
+            特殊: ctrl,alt,shift,meta(window)
+            如果配合keyup按下这个键位同时按下其他键才会触发(任意)
+            配合keydown正常使用
+
+            Vue.config.keyCodes.按键 = 键值, 可以定义按键别名
+     -->
+        <input @keyup.enter="showInfo" placeholder="键盘事件:回车运行">
+        <input @keyup.ctrl="showInfo" placeholder="键盘事件:ctrl运行1"><br>
+        <input @keyup.ctrl.y="showInfo" placeholder="键盘事件:ctrl运行2"><br>
+        <input @keydown.ctrl="showInfo" placeholder="键盘事件:ctrl运行3"><br>
+    </div>
+
+    <script>
+        // function showInfo() {
+        //     alert('你好');
+        // };
+
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: 'wsh'
+            },
+            methods: {
+                showInfo() {
+                    alert('你好');
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

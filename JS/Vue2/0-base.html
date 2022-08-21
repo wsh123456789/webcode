@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        单向绑定数据: <input type="text" v-bind:value="name"><br>
+        双向绑定数据: <input type="text" v-model:value="name"><br>
+        <!-- 简写方式 -->
+        单向绑定数据: <input type="text" :value="name"><br>
+        双向绑定数据: <input type="text" v-model="name"><br>
+        <!-- {{}}读取 -->
+        <h1>helloWorld,{{name}},{{age}}岁</h1>
+    </div>
+
+    <script>
+        //创建Vue实例
+        const x = new Vue({
+            // el: '#root',
+            // 对象式构造data
+            // data: { // 用于储存数据，提供给el的容器使用
+            //     name: 'wsh',
+            //     age: 18,
+            // },
+            // 函数式构造data
+            // data: function () {
+            //     return {
+            //         name: 'wsh',
+            //         age: 18,
+            //     }
+            // },
+            // 简写
+            data() {
+                return {
+                    name: 'wsh',
+                    age: 18,
+                }
+            }
+        });
+        console.log(x);
+        setTimeout(() => {
+            // el
+            x.$mount('#root');
+        }, 1000)
+        
+
+    </script>
+</body>
+
+</html>
