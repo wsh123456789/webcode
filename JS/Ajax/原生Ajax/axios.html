@@ -8,60 +8,70 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    //配置简化url 
+<button id="get">get</button>
+<button id="post">post</button>
+<button id="usual">通用</button>
+    <script>
+    //配置简化url
     axios.default.baseURL = 'http://127.0.0.1:8000';
-    axios.get('[目标地址]/server', {
-        <!-- url参数 -->
-        params: {
-            a: 100,
-            b: 200
-        },
-        <!-- 请求头信息 -->
-        headers: {
-            c: 300,
-            d: 400
-        }
-    })
+    const btns = document.querySelectorAll('button');
+    btns[0].onclick = function () {
+        axios.get('/server', {
+            <!-- url参数 -->
+            params: {
+                a: 100,
+                b: 200
+            },
+            <!-- 请求头信息 -->
+            headers: {
+                c: 300,
+                d: 400
+            }
+        })
+    }
 
-    axios.post('[目标地址]/server',   <!-- 请求体 -->data: {
-        username: 'aaa',
-        password: 'bbb'
-    },
-    {
-        <!-- url参数 -->
-        params: {
-            a: 100,
-            b: 200
-        },
-        <!-- 请求头信息 -->
-        headers: {
-            c: 300,
-            d: 400
-        }
-      
-        
-    })
-
-    <!-- //函数发送请求 -->
-        btn[1].onclick = function() {
-            axios({
-                <!-- //请求方法 -->
-                method: 'POST',
-                url: '/server',
-                params: {
-                    a: 100,
+    btns[1].onclick = function () {
+        axios.post('/server',
+        {
+            <!-- url参数 -->
+            params: {
+                a: 100,
                     b: 200
-                },
-                headers: {
-                    c: 300,
+            },
+            <!-- 请求头信息 -->
+            headers: {
+                c: 300,
                     d: 400
-                },
-                <!-- 请求体 -->
-                data: {
-                    username: 'aaa',
-                    password: 'bbb'
-                }
-            })
-        }
+            },
+            <!-- 请求体 -->
+            data: {
+                username: 'aaa',
+                password: 'bbb'
+            }
+        })
+    }
+
+    btns[2].onclick = function () {
+        axios({
+            method: 'get',
+            url: '/server',
+            params: {
+                a:100,
+                b:200,
+            },
+            headers: {
+                c:300,
+                d:400
+            },
+            data: {
+                username: 'aaa',
+                password: 'bbb'
+            }
+        }).then(response=>{
+            console.log(response);
+        })
+    }
+
+    </script>
 </body>
 </html>

@@ -1,4 +1,5 @@
-​<template>
+​
+<template>
   <Count />
 </template>
  
@@ -6,7 +7,7 @@
 import Count from "./components/Count";
 export default {
   name: "App",
-  components: {},
+  components: { Count },
   /* mounted() {
             console.log('App',this)
         }, */

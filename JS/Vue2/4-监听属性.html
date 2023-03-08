@@ -19,6 +19,11 @@
         <h3>b的值是{{numbers.b}}</h3>
         <button @click="numbers.b++">点击b+1</button>
         <button @click="numbers = {a:666,b:888}">彻底改变b</button>
+        <ul>
+            <li id="1" value="1" @click="click($event)">
+                hhhhhhh
+            </li>
+        </ul>
     </div>
     <script>
         Vue.config.productionTip = false;
@@ -39,6 +44,9 @@
             methods: {
                 changeWeather() {
                     this.isHot = !this.isHot;
+                },
+                click(event) {
+                    console.log(event.target.id);
                 }
             },
             watch: {

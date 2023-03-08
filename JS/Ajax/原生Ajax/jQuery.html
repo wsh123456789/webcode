@@ -5,8 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"> </script>
 </head>
 <body>
+    <button id="btnGet">发起不带参数的get请求</button>
+    <script>
+        $(function () {
+            $('#btnGet').on('click',function () {
+                $.get('http://localhost:8080/server',function (res) {
+                    console.log(res);
+                })
+            })
+        })
+    </script>
     $.get('目标地址', {参数}, function(data) {
         console.log('回调');
     }, 'json')
